@@ -72,6 +72,7 @@ export default function NewTrailPage() {
         </button>
       </form>
       <Link href="/trails">Back to trails</Link>
+      <Link href="/">Back to home</Link>
     </>
   );
 }

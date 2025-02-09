@@ -1,6 +1,11 @@
 import { db } from "@/utils/dbConnection";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Hiking Blog - Trails list",
+  description: "Discover amazing hiking experiences.",
+};
+
 export default async function TrailsPage({ params }) {
   const trailParams = await params;
 
@@ -28,6 +33,7 @@ export default async function TrailsPage({ params }) {
           </div>
         ))}
         <Link href="/trails">Back to trails</Link>
+        <Link href="/">Back to home</Link>
       </>
     );
   } catch (error) {
