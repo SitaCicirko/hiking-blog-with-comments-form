@@ -1,4 +1,10 @@
 import { db } from "@/util/dbConnection";
+import Link from "next/link";
+
+export const metadata = {
+  title: "Hiking Blog - Posts",
+  description: "Discover amazing hiking experiences.",
+};
 
 export default async function TrailsPage() {
   try {
@@ -14,14 +20,16 @@ export default async function TrailsPage() {
     console.log(wrangledTrail);
     return (
       <>
-        <h1>Trails Page</h1>
+        <h1>Trails: </h1>
         <ul>
           {wrangledTrail.map((trail) => (
             <div key={trail.id}>
-              <h1>Trail Name: {trail.name}</h1>
-              <p>Location: {trail.location}</p>
+              <Link href={`/trails/${trail.name.replace(/ /g, "_")}`}>
+                <>{trail.name}</>
+              </Link>
+              {/* <p>Location: {trail.location}</p>
               <p>Difficulty: {trail.difficulty}</p>
-              <p>Description: {trail.description}</p>
+              <p>Description: {trail.description}</p> */}
             </div>
           ))}
         </ul>

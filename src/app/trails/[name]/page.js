@@ -1,4 +1,5 @@
 import { db } from "@/util/dbConnection";
+import Link from "next/link";
 
 export default async function TrailsPage({ params }) {
   const trailParams = await params;
@@ -26,6 +27,7 @@ export default async function TrailsPage({ params }) {
             <p>Description: {trail.description}</p>
           </div>
         ))}
+        <Link href="/trails">Back to trails</Link>
       </>
     );
   } catch (error) {
