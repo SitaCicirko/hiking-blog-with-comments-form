@@ -5,3 +5,7 @@ I deleted the whole project and started from scratch. After that Ive slowly copi
 Next challenge was names of the trails that contained a space I had to figure out how to change \_ into " ".
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 added try and catch for errors
+
+I kept having an error in my TrailPage: `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+few hours later...
+I tried multiple different changes and the error is still there so I went back to the code we've been thought by Manny. The code is working as it should anyway.
