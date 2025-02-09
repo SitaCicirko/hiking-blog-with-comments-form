@@ -1,4 +1,4 @@
-import { db } from "@/util/dbConnection";
+import { db } from "@/utils/dbConnection";
 import Link from "next/link";
 
 export default async function TrailsPage({ params }) {

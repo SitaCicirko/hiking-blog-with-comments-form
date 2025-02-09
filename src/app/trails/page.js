@@ -1,4 +1,4 @@
-import { db } from "@/util/dbConnection";
+import { db } from "@/utils/dbConnection";
 import Link from "next/link";
 
 export const metadata = {
@@ -33,6 +33,7 @@ export default async function TrailsPage() {
             </div>
           ))}
         </ul>
+        <Link href={"/new-trail"}>Add a new trail</Link>
       </>
     );
   } catch (error) {
