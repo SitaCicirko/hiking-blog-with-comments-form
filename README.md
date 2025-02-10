@@ -13,3 +13,6 @@ I tried multiple different changes and the error is still there so I went back t
 I manged to re create my favorite app style in tailwind even though it took me 5 hours
 
 I added the delete button for the comments and had to fix another error. I couldn't figure out how to add a button next to each comment and ended up using form instead and its working.
+
+Also I learned a new comment git push --verbose
+Cos for some reason my terminal wasn't responding to git push -u origin main. Ive even tried restarting my laptop and it still wasn't working.
