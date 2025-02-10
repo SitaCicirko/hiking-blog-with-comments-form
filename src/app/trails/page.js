@@ -29,24 +29,53 @@ export default async function TrailsPage({ searchParams }) {
     }
 
     return (
-      <>
-        <h1>Trails: </h1>
-        <div>
-          <h3>Sort By Name:</h3>
-          <Link href="?sort=asc">A-Z</Link> | <Link href="?sort=desc">Z-A</Link>
+      <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-[#1e272e] text-[#d3d9d4]">
+        <h1 className="text-4xl text-[#84b8ec] mb-6">Trails</h1>
+        <div className="mb-6 flex gap-4">
+          <h3 className="text-lg">Sort By Name:</h3>
+          <Link
+            href="?sort=asc"
+            className="text-[#124e66] p-2 bg-[#84b8ec] rounded hover:bg-[#124e66] hover:text-white transition duration-300"
+          >
+            A-Z
+          </Link>
+          <Link
+            href="?sort=desc"
+            className="text-[#124e66] p-2 bg-[#84b8ec] rounded hover:bg-[#124e66] hover:text-white transition duration-300"
+          >
+            Z-A
+          </Link>
         </div>
-        <ul>
+        <ul className="w-full max-w-2xl space-y-6">
           {wrangledTrail.map((trail) => (
-            <div key={trail.id}>
-              <Link href={`/trails/${trail.name.replace(/ /g, "_")}`}>
-                <>{trail.name}</>
+            <li
+              key={trail.id}
+              className="bg-[#3b4b57] p-6 rounded-lg hover:transform hover:scale-105 transition-transform"
+            >
+              <Link
+                href={`/trails/${trail.name.replace(/ /g, "_")}`}
+                className="text-white hover:text-[#124e66] text-center text-2xl"
+              >
+                {trail.name}
               </Link>
-            </div>
+            </li>
           ))}
         </ul>
-        <Link href={"/new-trail"}>Add a new trail</Link>
-        <Link href={"/"}>Back to home</Link>
-      </>
+        <div className="mt-6 flex gap-4">
+          <Link
+            href="/new-trail"
+            className="p-4 text-xl bg-[#124e66] text-white rounded hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300"
+          >
+            Add a new trail
+          </Link>
+          <Link
+            href="/"
+            className="p-4 text-xl bg-[#124e66] text-white rounded hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </div>
     );
   } catch (error) {
     console.error("Error:", error);

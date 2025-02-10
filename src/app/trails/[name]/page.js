@@ -33,6 +33,16 @@ export default async function TrailPage({ params }) {
 
     console.log("Comments:", comments);
 
+    async function deleteComment(formData) {
+      "use server";
+      const commentId = formData.get("commentId");
+
+      await db.query("DELETE FROM comments WHERE id = $1", [commentId]);
+
+      revalidatePath(`/trails/${params.name}`);
+      redirect(`/trails/${params.name}`);
+    }
+
     async function handleSubmit(formValues) {
       "use server";
       const username = formValues.get("username");
@@ -46,44 +56,107 @@ export default async function TrailPage({ params }) {
       revalidatePath(`/trails/${params.name}`);
       redirect(`/trails/${params.name}`);
     }
-
     return (
-      <>
-        <h1>{trail.name}</h1>
-        <p>Location: {trail.location}</p>
-        <p>Difficulty: {trail.difficulty}</p>
-        <p>Description: {trail.description}</p>
+      <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-[#1e272e] text-[#d3d9d4]">
+        <div className="w-full max-w-2xl bg-[#3b4b57] p-6 rounded-lg shadow-lg">
+          <h1 className="text-4xl text-[#84b8ec] mb-4">{trail.name}</h1>
+          <p className="text-lg">
+            <span className="font-semibold">Location:</span> {trail.location}
+          </p>
+          <p className="text-lg">
+            <span className="font-semibold">Difficulty:</span>{" "}
+            {trail.difficulty}
+          </p>
+          <p className="mt-4 text-xl text-gray-300">{trail.description}</p>
+        </div>
 
-        <h2>Comments:</h2>
+        <h2 className="text-2xl font-semibold mt-6 mb-4">Comments:</h2>
         {comments.length > 0 ? (
-          <ul>
+          <ul className="w-full max-w-2xl space-y-6">
             {comments.map((comment) => (
-              <li key={comment.id}>
-                <strong>{comment.username}:</strong> {comment.content}
+              <li
+                key={comment.id}
+                className="bg-[#3b4b57] p-6 rounded-lg relative transition-all duration-300 [#4a5a63]"
+              >
+                <div className="mb-4">
+                  <strong className="text-[#84b8ec]">
+                    {comment.username}:
+                  </strong>{" "}
+                  {comment.content}
+                </div>
+
+                <form
+                  action={deleteComment}
+                  className="absolute bottom-4 right-4"
+                >
+                  <input type="hidden" name="commentId" value={comment.id} />
+                  <button
+                    type="submit"
+                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+                  >
+                    Delete
+                  </button>
+                </form>
               </li>
             ))}
           </ul>
         ) : (
-          <p>No comments yet.</p>
+          <p className="text-gray-400">No comments yet.</p>
         )}
 
-        <h2>Add a Comment:</h2>
-        <form action={handleSubmit}>
-          <label htmlFor="username">Your Name:</label>
-          <input type="text" id="username" name="username" required />
+        <h2 className="text-2xl font-semibold mt-6">Add a Comment:</h2>
+        <form action={handleSubmit} className="mt-4 space-y-4 w-full max-w-2xl">
+          <div>
+            <label htmlFor="username" className="block font-medium">
+              Your Name:
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              className="w-full p-2 bg-[#3b4b57] border border-gray-600 rounded"
+            />
+          </div>
 
-          <label htmlFor="content">Comment:</label>
-          <textarea id="content" name="content" required />
+          <div>
+            <label htmlFor="content" className="block font-medium">
+              Comment:
+            </label>
+            <textarea
+              id="content"
+              name="content"
+              required
+              className="w-full p-2 bg-[#3b4b57] border border-gray-600 rounded"
+            />
+          </div>
 
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            className="bg-[#84b8ec] hover:bg-[#124e66] text-[#124e66] hover:text-white px-4 py-2 rounded transition duration-300"
+          >
+            Submit
+          </button>
         </form>
 
-        <Link href="/trails">Back to Trails</Link>
-        <Link href="/">Back to Home</Link>
-      </>
+        <div className="mt-6 flex gap-4">
+          <Link
+            href="/trails"
+            className="p-4 text-xl bg-[#124e66] text-white rounded hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300"
+          >
+            Back to Trails
+          </Link>
+          <Link
+            href="/"
+            className="p-4 text-xl bg-[#124e66] text-white rounded hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </div>
     );
   } catch (error) {
     console.error("Error fetching trail data:", error);
-    return <h1>Error loading trail data</h1>;
+    return <h1 className="text-red-500 text-3xl">Error loading trail data</h1>;
   }
 }

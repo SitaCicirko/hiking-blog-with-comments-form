@@ -26,53 +26,83 @@ export default function NewTrailPage() {
   }
 
   return (
-    <>
-      <h1>Add a new Trail!</h1>
-      <form action={handleSubmit}>
-        <label htmlFor="name">Trail name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Trail name"
-          required
-        />
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-[#1e272e] text-[#d3d9d4]">
+      <h1 className="text-4xl text-[#84b8ec] mb-6">Add a New Trail!</h1>
+      <form
+        action={handleSubmit}
+        className="w-full max-w-3xl space-y-6 bg-[#3b4b57] p-8 rounded-lg"
+      >
+        <div className="flex flex-col space-y-6">
+          <label htmlFor="name" className="text-xl">
+            Trail name:
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Trail name"
+            required
+            className="p-4 bg-[#2e3b3d] text-[#d3d9d4] rounded-md w-full"
+          />
 
-        <label htmlFor="location">Location:</label>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          placeholder="Location"
-          required
-        />
+          <label htmlFor="location" className="text-xl">
+            Location:
+          </label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="Location"
+            required
+            className="p-4 bg-[#2e3b3d] text-[#d3d9d4] rounded-md w-full"
+          />
 
-        <label htmlFor="difficulty">Difficulty:</label>
-        <input
-          type="text"
-          id="difficulty"
-          name="difficulty"
-          placeholder="easy/moderate/hard"
-          required
-        />
+          <label htmlFor="difficulty" className="text-xl">
+            Difficulty:
+          </label>
+          <input
+            type="text"
+            id="difficulty"
+            name="difficulty"
+            placeholder="easy/moderate/hard"
+            required
+            className="p-4 bg-[#2e3b3d] text-[#d3d9d4] rounded-md w-full"
+          />
 
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Description"
-          required
-        />
+          <label htmlFor="description" className="text-xl">
+            Description:
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Description"
+            required
+            className="p-4 bg-[#2e3b3d] text-[#d3d9d4] rounded-md w-full"
+          />
+        </div>
 
         <button
           type="submit"
-          className="border-amber-600 border-4 m-4 hover:bg-sky-700"
+          className="mt-6 p-4 bg-[#124e66] text-white rounded-md hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300 w-full"
         >
           Submit
         </button>
       </form>
-      <Link href="/trails">Back to trails</Link>
-      <Link href="/">Back to home</Link>
-    </>
+
+      <div className="mt-6 flex gap-4">
+        <Link
+          href="/trails"
+          className="p-4 text-xl bg-[#124e66] text-white rounded-md hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300"
+        >
+          Back to Trails
+        </Link>
+        <Link
+          href="/"
+          className="p-4 text-xl bg-[#124e66] text-white rounded-md hover:bg-[#84b8ec] hover:text-[#124e66] transition duration-300"
+        >
+          Back to Home
+        </Link>
+      </div>
+    </div>
   );
 }
